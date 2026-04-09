@@ -58,9 +58,9 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 1. Authors:
 
    Zespół 11:
-   Marcin Kowalczyk
-   Alicja Jurzysta
-   Kacper Pawłowski
+   Marcin Kowalczyk,
+   Alicja Jurzysta,
+   Kacper Pawłowski.
 
    [Our repo link](https://github.com/arion023/tbd-workshop-1)
 
