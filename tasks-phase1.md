@@ -57,15 +57,18 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 1. Authors:
 
-   11
+   Zespół 11:
+   Marcin Kowalczyk
+   Alicja Jurzysta
+   Kacper Pawłowski
 
    [Our repo link](https://github.com/arion023/tbd-workshop-1)
 
-2. Follow all steps in README.md.
+3. Follow all steps in README.md.
 
-3. From available Github Actions select and run destroy on master branch.
+4. From available Github Actions select and run destroy on master branch.
 
-4. Create new git branch and:
+5. Create new git branch and:
     1. Modify tasks-phase1.md file.
 
     2. Create PR from this branch to **YOUR** master and merge it to make new release.
@@ -73,11 +76,11 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     ***place the screenshot from GA after successful application of release***
 
 
-5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
+6. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
     ***describe one selected module and put the output of terraform graph for this module here***
 
-6. Reach YARN UI
+7. Reach YARN UI
 
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
 
@@ -85,13 +88,13 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
    See: `gcloud compute ssh` with `-- -L <local_port>:localhost:<remote_port>` and `--tunnel-through-iap` flag.
    YARN ResourceManager UI runs on port **8088**.
 
-7. Draw an architecture diagram (e.g. in draw.io) that includes:
+8. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
     2. List of buckets for disposal
 
     ***place your diagram here***
 
-8. Create a new PR and add costs by entering the expected consumption into Infracost
+9. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
@@ -99,7 +102,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
    ***place the screenshot from infracost output here***
 
-9. Find and correct the error in spark-job.py
+10. Find and correct the error in spark-job.py
 
     After `terraform apply` completes, connect to the Airflow cluster:
     ```bash
