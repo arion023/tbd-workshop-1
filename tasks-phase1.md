@@ -91,6 +91,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 8. Reach YARN UI
 
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
+   
    Komenda: gcloud.cmd compute ssh tbd-cluster-m --project=tbd-2026l-11 --zone=europe-west1-b --tunnel-through-iap -- -L 8088:localhost:8088
 
    <img width="1915" height="344" alt="image" src="https://github.com/user-attachments/assets/2c51bf3f-78d4-4b89-b041-50b5f9310a30" />
