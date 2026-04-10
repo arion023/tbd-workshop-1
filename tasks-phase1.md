@@ -177,9 +177,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     Link do pliku: https://github.com/arion023/tbd-workshop-1/blob/master/modules/dataproc/main.tf
 
-    Wstawiony kod:
-
-    preemptible_worker_config {
+    Wstawiony kod: preemptible_worker_config {
       num_instances = 2
     }
 
