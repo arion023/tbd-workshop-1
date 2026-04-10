@@ -78,8 +78,11 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
     ***place the screenshot from GA after successful application of release***
 
+   <img width="1891" height="890" alt="image" src="https://github.com/user-attachments/assets/44f3b7f9-11ae-4873-a783-b277f3aa11b5" />
 
-6. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
+
+
+7. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
     ***describe one selected module and put the output of terraform graph for this module here***
    <img width="637" height="224" alt="image" src="https://github.com/user-attachments/assets/67603a7d-af7b-40b7-a37a-e7b270f5388d" />
@@ -172,7 +175,17 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     ***place the link to the modified file and inserted terraform code***
 
-14. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
+    Link do pliku: https://github.com/arion023/tbd-workshop-1/blob/master/modules/dataproc/main.tf
+
+    Wstawiony kod:
+
+    preemptible_worker_config {
+      num_instances = 2
+    }
+
+    
+
+15. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
 Add a new GitHub Actions workflow that:
   1. runs terraform destroy -auto-approve
