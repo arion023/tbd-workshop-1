@@ -90,17 +90,23 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
 
+   Komenda: gcloud.cmd compute ssh tbd-cluster-m --project=tbd-2026l-11 --zone=europe-west1-b --tunnel-through-iap -- -L 8088:localhost:8088
+
+
+  <img width="1915" height="344" alt="image" src="https://github.com/user-attachments/assets/2c51bf3f-78d4-4b89-b041-50b5f9310a30" />
+
+
    Hint: the Dataproc cluster has `internal_ip_only = true`, so you need to use an IAP tunnel.
    See: `gcloud compute ssh` with `-- -L <local_port>:localhost:<remote_port>` and `--tunnel-through-iap` flag.
    YARN ResourceManager UI runs on port **8088**.
 
-9. Draw an architecture diagram (e.g. in draw.io) that includes:
+10. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
     2. List of buckets for disposal
 
     ***place your diagram here***
 
-10. Create a new PR and add costs by entering the expected consumption into Infracost
+11. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
