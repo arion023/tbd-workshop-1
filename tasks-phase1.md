@@ -64,7 +64,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
    [Our repo link](https://github.com/arion023/tbd-workshop-1)
 
-3. Follow all steps in README.md.
+2. Follow all steps in README.md.
 
 4. From available Github Actions select and run destroy on master branch.
 
@@ -80,21 +80,15 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
     ***describe one selected module and put the output of terraform graph for this module here***
    <img width="637" height="224" alt="image" src="https://github.com/user-attachments/assets/67603a7d-af7b-40b7-a37a-e7b270f5388d" />
-
    Wybrany moduł: gcr (Google Container Registry / Artifact Registry)
-
-    Moduł ten odpowiada za utworzenie repozytorium w usłudze Google Artifact Registry (zasób google_artifact_registry_repository.registry), które będzie służyć do     przechowywania obrazów Docker. Dodatkowo włącza niezbędne API w projekcie GCP (google_project_service.api).
-
-
+   Moduł ten odpowiada za utworzenie repozytorium w usłudze Google Artifact Registry (zasób google_artifact_registry_repository.registry), które będzie służyć do     przechowywania obrazów Docker. Dodatkowo włącza niezbędne API w projekcie GCP (google_project_service.api).
+   
 8. Reach YARN UI
 
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
-
    Komenda: gcloud.cmd compute ssh tbd-cluster-m --project=tbd-2026l-11 --zone=europe-west1-b --tunnel-through-iap -- -L 8088:localhost:8088
 
-
-  <img width="1915" height="344" alt="image" src="https://github.com/user-attachments/assets/2c51bf3f-78d4-4b89-b041-50b5f9310a30" />
-
+   <img width="1915" height="344" alt="image" src="https://github.com/user-attachments/assets/2c51bf3f-78d4-4b89-b041-50b5f9310a30" />
 
    Hint: the Dataproc cluster has `internal_ip_only = true`, so you need to use an IAP tunnel.
    See: `gcloud compute ssh` with `-- -L <local_port>:localhost:<remote_port>` and `--tunnel-through-iap` flag.
