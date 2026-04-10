@@ -86,7 +86,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
    Wybrany moduł: gcr (Google Container Registry / Artifact Registry)
    
-   Moduł ten odpowiada za utworzenie repozytorium w usłudze Google Artifact Registry (zasób google_artifact_registry_repository.registry), które będzie służyć do     przechowywania obrazów Docker. Dodatkowo włącza niezbędne API w projekcie GCP (google_project_service.api).
+   Moduł ten odpowiada za utworzenie repozytorium w usłudze Google Artifact Registry (zasób google_artifact_registry_repository.registry), służącego do bezpiecznego przechowywania i zarządzania artefaktami programistycznymi. Dodatkowo włącza niezbędne API w projekcie GCP (google_project_service.api).
    
 8. Reach YARN UI
 
