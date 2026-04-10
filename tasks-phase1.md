@@ -58,13 +58,16 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 1. Authors:
 
    Zespół 11:
+
    Marcin Kowalczyk,
+
    Alicja Jurzysta,
+
    Kacper Pawłowski.
 
    [Our repo link](https://github.com/arion023/tbd-workshop-1)
 
-2. Follow all steps in README.md.
+3. Follow all steps in README.md.
 
 4. From available Github Actions select and run destroy on master branch.
 
@@ -80,6 +83,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
     ***describe one selected module and put the output of terraform graph for this module here***
    <img width="637" height="224" alt="image" src="https://github.com/user-attachments/assets/67603a7d-af7b-40b7-a37a-e7b270f5388d" />
+
    Wybrany moduł: gcr (Google Container Registry / Artifact Registry)
    Moduł ten odpowiada za utworzenie repozytorium w usłudze Google Artifact Registry (zasób google_artifact_registry_repository.registry), które będzie służyć do     przechowywania obrazów Docker. Dodatkowo włącza niezbędne API w projekcie GCP (google_project_service.api).
    
