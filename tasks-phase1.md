@@ -194,7 +194,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
       format = 'ORC',
       uris = ['gs://tbd-2026l-11-data/data/shakespeare/part-*.orc']);
     
-    SELECT * FROM 1tbd-2026l-11.shakespeare.mytable1;
+    SELECT * FROM tbd-2026l-11.shakespeare.mytable1;
 
     ```
 
