@@ -65,7 +65,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
    Kacper Pawłowski.
 
-   [Our repo link](https://github.com/arion023/tbd-workshop-1)
+   [](https://github.com/arion023/tbd-workshop-1)
 
 3. Follow all steps in README.md.
 
@@ -78,7 +78,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
     ***place the screenshot from GA after successful application of release***
 
-   <img width="1891" height="890" alt="image" src="https://github.com/user-attachments/assets/44f3b7f9-11ae-4873-a783-b277f3aa11b5" />
+  ![img.png](doc/figures/added/successful-pr.png)
 
 
 
@@ -137,11 +137,19 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     ***place a screenshot of the DAG in the Airflow UI***
 
+    ![img.png](doc/figures/added/spark-job-failed.png)
+
     b) The DAG will fail. Examine the task logs in the Airflow UI to find the root cause.
 
     ***paste the relevant error message from the Airflow task log***
 
+    ![img.png](doc/figures/added/spark-job-error-airflow-log.png)
+
+    ![img.png](doc/figures/added/spark-job-error-gcp-log.png)
+
     ***describe what the error is and how you found it***
+
+    We located the error by navigating to the Airflow UI and clicking the "View Log" button for the failed task. Upon examining these logs, we found an external link directing us to the GCP Console. The GCP logs contained a detailed Java error, which revealed the root cause of the issue: the name of the data bucket was incorrect.
 
     c) Fix the error in `modules/data-pipeline/resources/spark-job.py` and re-upload the file to GCS:
     ```bash
@@ -149,7 +157,14 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     ```
     Then trigger the DAG again from the Airflow UI.
 
+    Incorrect line:
+    `DATA_BUCKET = "gs://tbd-2026l-9010-data/data/shakespeare/"`
+
+    Corrected to:
+    `DATA_BUCKET = "gs://tbd-2026l-11-data/data/shakespeare/"`
+
     ***paste the link to the fixed file***
+    [](https://github.com/arion023/modules/data-pipeline/resources/spark-job.py)
 
     d) Verify the DAG completes successfully and check that ORC files were written to the data bucket:
     ```bash
@@ -157,6 +172,8 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     ```
 
     ***place a screenshot of the successful DAG run in Airflow UI***
+  
+    ![img.png](doc/figures/added/spark-job-successful.png)
 
 12. Create a BigQuery dataset and an external table using SQL
 
@@ -169,7 +186,24 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     ***place the SQL code and query output here***
 
+    SQL code (dataset created as above)
+
+    ```
+    CREATE OR REPLACE EXTERNAL TABLE `tbd-2026l-11.shakespeare.mytable` OPTIONS(
+      format = 'ORC',
+      uris = ['gs://tbd-2026l-11-data/data/shakespeare/part-*.orc']);
+    
+    SELECT * FROM 1tbd-2026l-11.shakespeare.mytable1;
+
+    ```
+
+    ![img.png](doc/figures/added/bigquery-with-result.png)
+
+    
+
     ***why does ORC not require a table schema?***
+
+    ORC format stores columns and has already embedded inside information about columns names and type informations.
 
 13. Add support for preemptible/spot instances in a Dataproc cluster
 
