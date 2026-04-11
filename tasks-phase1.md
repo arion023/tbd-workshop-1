@@ -65,7 +65,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
    Kacper Pawłowski.
 
-   [](https://github.com/arion023/tbd-workshop-1)
+   [https://github.com/arion023/tbd-workshop-1](https://github.com/arion023/tbd-workshop-1)
 
 3. Follow all steps in README.md.
 
@@ -164,7 +164,8 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     `DATA_BUCKET = "gs://tbd-2026l-11-data/data/shakespeare/"`
 
     ***paste the link to the fixed file***
-    [](https://github.com/arion023/modules/data-pipeline/resources/spark-job.py)
+    
+    [https://github.com/arion023/modules/data-pipeline/resources/spark-job.py](https://github.com/arion023/modules/data-pipeline/resources/spark-job.py)
 
     d) Verify the DAG completes successfully and check that ORC files were written to the data bucket:
     ```bash
