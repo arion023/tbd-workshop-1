@@ -107,7 +107,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     1. Description of the components of service accounts
     2. List of buckets for disposal
 
-    ***place your diagram here***
+![Architecture diagram](doc/figures/architecture-diagram.png)
 
 11. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
