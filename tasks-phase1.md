@@ -286,6 +286,6 @@ jobs:
         run: terraform destroy -no-color -var-file=env/project.tfvars -auto-approve
 ```
 
-![Auto destroy workflow](doc/figures/auto-destroy-workflow.png)
+![Auto destroy workflow](doc/figures/auto_destroy_workflow.png)
 
 Zaplanowane usuwanie zasobów pomaga w tym warsztacie, ponieważ zmniejsza ryzyko pozostawienia działającej infrastruktury po zakończeniu pracy i pozwala uniknąć niepotrzebnego zużywania środków.
