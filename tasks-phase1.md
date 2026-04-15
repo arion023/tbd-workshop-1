@@ -67,11 +67,11 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
    [https://github.com/arion023/tbd-workshop-1](https://github.com/arion023/tbd-workshop-1)
 
-3. Follow all steps in README.md.
+2. Follow all steps in README.md.
 
-4. From available Github Actions select and run destroy on master branch.
+3. From available Github Actions select and run destroy on master branch.
 
-5. Create new git branch and:
+4. Create new git branch and:
     1. Modify tasks-phase1.md file.
 
     2. Create PR from this branch to **YOUR** master and merge it to make new release.
@@ -82,7 +82,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 
 
-7. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
+5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
     ***describe one selected module and put the output of terraform graph for this module here***
    <img width="637" height="224" alt="image" src="https://github.com/user-attachments/assets/67603a7d-af7b-40b7-a37a-e7b270f5388d" />
@@ -91,7 +91,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
    
    Moduł ten odpowiada za utworzenie repozytorium w usłudze Google Artifact Registry (zasób google_artifact_registry_repository.registry), służącego do bezpiecznego przechowywania i zarządzania artefaktami programistycznymi. Dodatkowo włącza niezbędne API w projekcie GCP (google_project_service.api).
    
-8. Reach YARN UI
+6. Reach YARN UI
 
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
    
@@ -103,13 +103,13 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
    See: `gcloud compute ssh` with `-- -L <local_port>:localhost:<remote_port>` and `--tunnel-through-iap` flag.
    YARN ResourceManager UI runs on port **8088**.
 
-10. Draw an architecture diagram (e.g. in draw.io) that includes:
+7. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
     2. List of buckets for disposal
 
 ![Architecture diagram](doc/figures/architecture-diagram.png)
 
-11. Create a new PR and add costs by entering the expected consumption into Infracost
+8. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
@@ -175,7 +175,7 @@ resource_usage:
 
 ![Infracost output](doc/figures/infracost-output.png)
 
-11. Find and correct the error in spark-job.py
+9. Find and correct the error in spark-job.py
 
     After `terraform apply` completes, connect to the Airflow cluster:
     ```bash
@@ -234,7 +234,7 @@ resource_usage:
   
     ![img.png](doc/figures/added/spark-job-successful.png)
 
-12. Create a BigQuery dataset and an external table using SQL
+10. Create a BigQuery dataset and an external table using SQL
 
     Using the ORC data produced by the Spark job in task 9, create a BigQuery dataset and an external table.
 
@@ -264,7 +264,7 @@ resource_usage:
 
     ORC format stores columns and has already embedded inside information about columns names and type informations.
 
-13. Add support for preemptible/spot instances in a Dataproc cluster
+11. Add support for preemptible/spot instances in a Dataproc cluster
 
     ***place the link to the modified file and inserted terraform code***
 
@@ -276,7 +276,7 @@ resource_usage:
 
     
 
-14. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
+12. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
 Add a new GitHub Actions workflow that:
   1. runs terraform destroy -auto-approve
