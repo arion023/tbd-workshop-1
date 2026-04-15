@@ -113,9 +113,67 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
-   ***place the expected consumption you entered here***
+Użyliśmy pliku `infracost-usage.yml`, aby określić przewidywane zużycie zasobów dla `google_artifact_registry_repository` oraz `google_storage_bucket`. Plik został dodany do głównego katalogu projektu i podpięty do workflow `.github/workflows/pull-request.yml` za pomocą opcji `--usage-file=infracost-usage.yml`.
 
-   ***place the screenshot from infracost output here***
+```yaml
+version: 0.1
+
+resource_usage:
+  module.gcr.google_artifact_registry_repository.registry:
+    storage_gb: 2
+    monthly_egress_data_transfer_gb:
+      europe_west1: 20
+
+  module.data-pipelines.google_storage_bucket.tbd-code-bucket:
+    storage_gb: 5
+    monthly_class_a_operations: 5000
+    monthly_class_b_operations: 3000
+    monthly_data_retrieval_gb: 10
+    monthly_egress_data_transfer_gb:
+      same_continent: 5
+      worldwide: 2
+      asia: 0
+      china: 0
+      australia: 0
+
+  module.data-pipelines.google_storage_bucket.tbd-data-bucket:
+    storage_gb: 20
+    monthly_class_a_operations: 10000
+    monthly_class_b_operations: 8000
+    monthly_data_retrieval_gb: 50
+    monthly_egress_data_transfer_gb:
+      same_continent: 20
+      worldwide: 5
+      asia: 0
+      china: 0
+      australia: 0
+
+  module.dataproc.google_storage_bucket.dataproc_staging:
+    storage_gb: 10
+    monthly_class_a_operations: 4000
+    monthly_class_b_operations: 4000
+    monthly_data_retrieval_gb: 10
+    monthly_egress_data_transfer_gb:
+      same_continent: 5
+      worldwide: 0
+      asia: 0
+      china: 0
+      australia: 0
+
+  module.dataproc.google_storage_bucket.dataproc_temp:
+    storage_gb: 10
+    monthly_class_a_operations: 4000
+    monthly_class_b_operations: 4000
+    monthly_data_retrieval_gb: 10
+    monthly_egress_data_transfer_gb:
+      same_continent: 5
+      worldwide: 0
+      asia: 0
+      china: 0
+      australia: 0
+```
+
+![Infracost output](doc/figures/infracost-output.png)
 
 11. Find and correct the error in spark-job.py
 
