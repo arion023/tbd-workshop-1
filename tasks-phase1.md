@@ -218,7 +218,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     
 
-15. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
+14. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
 Add a new GitHub Actions workflow that:
   1. runs terraform destroy -auto-approve
@@ -235,8 +235,59 @@ Steps:
 
 Hint: use the existing `.github/workflows/destroy.yml` as a starting point.
 
-***paste workflow YAML here***
+```yaml
+name: Auto destroy
 
-***paste screenshot/log snippet confirming the auto-destroy ran***
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+  schedule:
+    - cron: "0 20 * * *"
+  workflow_dispatch:
 
-***write one sentence why scheduling cleanup helps in this workshop***
+permissions: read-all
+
+jobs:
+  auto-destroy:
+    if: >
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.merged == true &&
+       contains(github.event.pull_request.title, '[CLEANUP]')) ||
+      (github.event_name == 'schedule') ||
+      (github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.11.0
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_NAME }}
+          service_account: ${{ secrets.GCP_WORKLOAD_IDENTITY_SA_EMAIL }}
+
+      - name: Terraform Init
+        run: terraform init -backend-config=env/backend.tfvars
+
+      - name: Terraform Destroy
+        run: terraform destroy -no-color -var-file=env/project.tfvars -auto-approve
+```
+
+![Auto destroy workflow](doc/figures/auto-destroy-workflow.png)
+
+```text
+Zaplanowane usuwanie zasobów pomaga w tym warsztacie, ponieważ zmniejsza ryzyko pozostawienia działającej infrastruktury po zakończeniu pracy i pozwala uniknąć niepotrzebnego zużywania środków.
+```
