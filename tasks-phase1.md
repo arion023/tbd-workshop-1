@@ -288,6 +288,4 @@ jobs:
 
 ![Auto destroy workflow](doc/figures/auto-destroy-workflow.png)
 
-```text
 Zaplanowane usuwanie zasobów pomaga w tym warsztacie, ponieważ zmniejsza ryzyko pozostawienia działającej infrastruktury po zakończeniu pracy i pozwala uniknąć niepotrzebnego zużywania środków.
-```
