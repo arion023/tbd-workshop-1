@@ -6,10 +6,11 @@ import gc
 import time
 # from memory_profiler import memory_usage
 import numpy as np
+import argparse
 
 
 OUTPUT_DIR = "gs://tbd-2026l-11-data"
-# OUTPUT_DIR = Path("data/phase2_26L") / f"group_11"
+# OUTPUT_DIR = "data/phase2_26L/group_11"
 
 EVENTS_PATH = OUTPUT_DIR + "/events.parquet"
 STRESS_EVENTS_PATH = OUTPUT_DIR + "/events_large.parquet"
@@ -142,10 +143,10 @@ def run_benchmark(
 
     benchmark_results.append(result)
 
-    print(
-        f"-> [{engine} | {mode}] {query_name}: "
-        f"{result['median_time_s']} s, peak RSS {result['peak_memory_mb']} MB"
-    )
+    # print(
+    #     f"-> [{engine} | {mode}] {query_name}: "
+    #     f"{result['median_time_s']} s, peak RSS {result['peak_memory_mb']} MB"
+    # )
 
     return result
 
@@ -157,6 +158,7 @@ spark = (
     # .config("spark.driver.memory", "4g")
     .getOrCreate()
 )
+spark.sparkContext.setLogLevel("ERROR")
 
 def spark_q1_delayed_by_region():
     events = spark.read.parquet(str(EVENTS_PATH))
@@ -222,8 +224,28 @@ LOCAL_BENCHMARKS = [
 ]
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Dataproc Benchmark Runner")
+    
+    parser.add_argument(
+        "--stress-mode", 
+        action="store_true", 
+        help="Run the benchmark using the massive stress-test datasets"
+    )
+    
+    args = parser.parse_args()
+
+    if args.stress_mode:
+        print("RUNNING IN STRESS MODE")
+        current_events_path = STRESS_EVENTS_PATH
+        EVENTS_PATH = STRESS_EVENTS_PATH
+        DIMENSION_PATH = STRESS_DIMENSION_PATH
+        notes = "Dataproc STRESS benchmark on large dataset. Peak memory is process RSS."
+    else:
+        print("RUNNING IN NORMAL MODE")
+        notes = "Dataproc benchmark on the normal generated Parquet dataset. Peak memory is process RSS."
+    results = []
     for query_name, engine, mode, func in LOCAL_BENCHMARKS:
-        run_benchmark(
+        res = run_benchmark(
             query_name=query_name,
             engine=engine,
             mode=mode,
@@ -233,30 +255,14 @@ if __name__ == "__main__":
             layout="default",
             input_path=EVENTS_PATH,
             result_check="passed",
-            notes="Dataproc benchmark on the same generated Parquet dataset. Peak memory is process RSS measured from the dataproc.",
+            notes=notes,
         )
+        results.append(res)
 
-
-    benchmark_df = pd.DataFrame(benchmark_results, columns=BENCHMARK_COLUMNS)
-    print(benchmark_df)
-
-    DIMENSION_PATH = STRESS_DIMENSION_PATH
-    EVENTS_PATH = STRESS_EVENTS_PATH
-
-    for query_name, engine, mode, func in LOCAL_BENCHMARKS:
-        run_benchmark(
-            query_name=query_name,
-            engine=engine,
-            mode=mode,
-            func=func,
-            repetitions=3,
-            data_format="parquet",
-            layout="default",
-            input_path=EVENTS_PATH,
-            result_check="passed",
-            notes="Dataproc benchmark on the same generated Parquet dataset. Peak memory is process RSS measured from the dataproc.",
+    for r in results:
+        print(
+            f"-> [{engine} | {mode}] {query_name}: "
+            f"{r['median_time_s']} s, peak RSS {r['peak_memory_mb']} MB"
         )
-
-
-    benchmark_df = pd.DataFrame(benchmark_results, columns=BENCHMARK_COLUMNS)
-    print(benchmark_df)
+    # benchmark_df = pd.DataFrame(benchmark_results, columns=BENCHMARK_COLUMNS)
+    # print(benchmark_df)
